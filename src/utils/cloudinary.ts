@@ -46,5 +46,13 @@ export const uploadOnCloudinary = async (
       500,
       'CLOUDINARY_UPLOAD_FAILED',
     );
+  } finally {
+    files.forEach((file) => {
+      try {
+        fs.unlinkSync(file);
+      } catch (err) {
+        Logging.error(err);
+      }
+    });
   }
 };
