@@ -25,7 +25,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     credentials: true,
-    origin: [process.env.CLIENT_URI!],
+    allowedHeaders: process.env.CLIENT_URI!,
+    origin: process.env.CLIENT_URI!,
   }),
 );
 app.use(cookieParser());
