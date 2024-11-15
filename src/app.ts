@@ -22,13 +22,23 @@ const swaggerSpec = swaggerJsDoc(options);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Replace this with the URL of your frontend
+const allowedOrigins = [process.env.CLIENT_URI];
+
 app.use(
   cors({
-    credentials: true,
-    allowedHeaders: process.env.CLIENT_URI!,
-    origin: process.env.CLIENT_URI!,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods if needed
+    credentials: true, // Enable if your API requires credentials (cookies, etc.)
   }),
 );
+
 app.use(cookieParser());
 
 app.use('/api/v1/user', userRoutes);
