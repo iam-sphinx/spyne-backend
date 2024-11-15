@@ -80,7 +80,6 @@ const queryValidations = [
 
 router.route('/cars').get(queryValidations, validateError, verifyJWT, userCars);
 
-
 /**
  * @swagger
  * /users/info:
