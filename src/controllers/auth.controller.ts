@@ -32,7 +32,11 @@ export const signupController = asyncHandler(async (req, res, next) => {
   const expires = new Date(today.setDate(today.getDate() + 7));
   res
     .status(200)
-    .cookie('access_token', accessToken, { expires })
+    .cookie('access_token', accessToken, {
+      expires,
+      sameSite: 'none',
+      secure: true,
+    })
     .json(successResponse());
 });
 
@@ -62,7 +66,11 @@ export const signinController = asyncHandler(async (req, res, next) => {
   const expires = new Date(today.setDate(today.getDate() + 7));
   res
     .status(200)
-    .cookie('access_token', accessToken, { expires })
+    .cookie('access_token', accessToken, {
+      expires,
+      sameSite: 'none',
+      secure: true,
+    })
     .json(successResponse());
 });
 
@@ -93,6 +101,10 @@ export const googleController = asyncHandler(async (req, res, next) => {
   const expires = new Date(today.setDate(today.getDate() + 7));
   res
     .status(200)
-    .cookie('access_token', accessToken, { expires })
+    .cookie('access_token', accessToken, {
+      expires,
+      sameSite: 'none',
+      secure: true,
+    })
     .json(successResponse());
 });
