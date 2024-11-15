@@ -153,7 +153,7 @@ router.route('/info').get(verifyJWT, getUserDetails);
 router
   .route('/is-exists')
   .post(
-    body('email').escape().isEmail().withMessage('Invalid email format'),
+    body('email').isEmail().withMessage('Invalid email format').escape(),
     validateError,
     isUserExists,
   );
